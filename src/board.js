@@ -2,8 +2,16 @@ import knightImage from "./knight.svg";
 console.log("Knight URL: ", knightImage);
 
 export class Board {
+    constructor() {
+        this.positions = {
+            start: null,
+            end: null
+        };
+    }
+
     create(rows = 8, columns = 8) {
         const chessboard = document.getElementById("chessboard");
+
         let knightPosition = null;
         let markedSquare = null;
 
@@ -35,6 +43,8 @@ export class Board {
                     square.appendChild(knight);
                     knightPosition = square;
 
+                    this.positions.start = [parseInt(square.dataset.row), parseInt(square.dataset.column)];
+
                     console.log(`[${square.dataset.column}, ${square.dataset.row}]`);
                 });
 
@@ -49,11 +59,32 @@ export class Board {
                     square.classList.add("marked");
                     markedSquare = square;
 
+                    this.positions.end = [parseInt(square.dataset.row), parseInt(square.dataset.column)];
+
                     console.log(`[${square.dataset.row}, ${square.dataset.column}]`);
                 });
 
                 chessboard.appendChild(square);
             }
         }
+    }
+
+    clear() {
+        const chessboard = document.getElementById("chessboard");
+
+        const knights = chessboard.querySelectorAll(".knight");
+        knights.forEach(knight => {
+            knight.parentNode.removeChild(knight);
+        });
+
+        const markedSquares = chessboard.querySelectorAll(".marked");
+        markedSquares.forEach(square => {
+            square.classList.remove("marked");
+        });
+
+        this.positions.start = null;
+        this.positions.end = null;
+
+        console.log("Board cleared.");
     }
 }
