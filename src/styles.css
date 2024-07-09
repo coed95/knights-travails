@@ -24,6 +24,7 @@ body {
 .square {
     width: 90px;
     height: 90px;
+    position: relative;
 }
 
 .black {
@@ -32,4 +33,17 @@ body {
 
 .white {
     background-color: #eeeed2;
+}
+
+.knight {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 90%;
+    height: 90%;
+    margin-top: 0.2rem;
+}
+
+.marked {
+    background-color: red !important;
 }
